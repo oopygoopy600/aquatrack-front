@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-brand-50: #eef6ff;
+  --color-brand-100: #d9ebff;
+  --color-brand-200: #bcdcff;
+  --color-brand-300: #8ec6ff;
+  --color-brand-400: #59a5ff;
+  --color-brand-500: #3382fb;
+  --color-brand-600: #1d63ef;
+  --color-brand-700: #184edb;
+  --color-brand-800: #1a41b1;
+  --color-brand-900: #1b3a8b;
+  --color-brand-950: #142554;
+
+  --color-aqua-50: #ecfeff;
+  --color-aqua-100: #cffafe;
+  --color-aqua-200: #a5f3fc;
+  --color-aqua-300: #67e8f9;
+  --color-aqua-400: #22d3ee;
+  --color-aqua-500: #06b6d4;
+  --color-aqua-600: #0891b2;
+  --color-aqua-700: #0e7490;
+  --color-aqua-800: #155e75;
+  --color-aqua-900: #164e63;
+
+  --color-navy-700: #23324d;
+  --color-navy-800: #18243a;
+  --color-navy-900: #0f172a;
+  --color-navy-950: #0a1120;
+
+  --color-surface: #f3f7fb;
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 32px -12px rgb(15 23 42 / 0.18);
+  --shadow-float: 0 24px 60px -24px rgb(15 23 42 / 0.35);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-surface text-navy-900 font-sans;
+    margin: 0;
+  }
+
+  ::selection {
+    background-color: var(--color-aqua-200);
+    color: var(--color-navy-900);
+  }
+}
+
+/* Thin scrollbars that match the dashboard chrome */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Small reusable animation used on login and empty states */
+@keyframes float-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-up {
+  animation: float-up 0.45s ease-out both;
+}
+
+/* Printable reports: remove screen chrome, keep tables readable on paper. */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-report section {
+    break-inside: avoid;
+  }
+
+  .print-report h1,
+  .print-report h2 {
+    break-after: avoid;
+  }
+
+  .print-report table {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 9px !important;
+  }
+
+  .print-report .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  .print-report thead {
+    display: table-header-group;
+  }
+
+  .print-report tr {
+    break-inside: avoid;
+  }
+}
